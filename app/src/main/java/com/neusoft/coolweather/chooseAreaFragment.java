@@ -98,7 +98,7 @@ public class chooseAreaFragment extends Fragment{
             currentLevel = LEVEL_PROVINCE;
         }else{
             String address = "http://guolin.tech/api/china";
-           queryFromServer(address,"province");
+            queryFromServer(address,"province");
         }
     }
 
@@ -109,11 +109,11 @@ public class chooseAreaFragment extends Fragment{
             public void onResponse(Call call, Response response) throws IOException {
              String responseText = response.body().string();
                 boolean result = false;
-                if("province".equals(type)){
+                if(type.equals("province")){
                     result = Utility.handleProvinceResponse(responseText);
-                }else if("city".equals(type)){
+                }else if(type.equals("city")){
                     result = Utility.handleCityResponse(responseText,selectedProvince.getId());
-                }else if("county".equals(type)){
+                }else if(type.equals("county")){
                     result = Utility.handleCountyResponse(responseText,selectedCity.getId());
                 }
                 if(result){
@@ -121,11 +121,11 @@ public class chooseAreaFragment extends Fragment{
                         @Override
                         public void run() {
                             closeProgressDialog();
-                            if("province".equals(type)){
+                            if(type.equals("province")){
                               queryProvinces();
-                            }else if("city".equals(type)){
+                            }else if(type.equals("city")){
                                 queryCities();
-                            }else if("county".equals(type)){
+                            }else if(type.equals("county")){
                                queryCounties();
                             }
                         }
@@ -166,7 +166,7 @@ public class chooseAreaFragment extends Fragment{
         countyList = DataSupport.where("cityid = ?",String.valueOf(selectedCity.getId())).find(County.class);
         if(countyList.size()> 0){
             dataList.clear();
-            for(County county:countyList){
+            for(County county : countyList){
             dataList.add(county.getCountyName());
             }
             adapter.notifyDataSetChanged();
@@ -175,7 +175,7 @@ public class chooseAreaFragment extends Fragment{
         }else{
             int provinceCode = selectedProvince.getProvinceCode();
             int cityCode = selectedCity.getCityCode();
-            String address = "http://guolin.tech/api/china/"+provinceCode+"/"+cityCode;
+            String address = "http://guolin.tech/api/china/"+ provinceCode +"/"+cityCode;
             queryFromServer(address,"county");
         }
     }
