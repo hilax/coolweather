@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import com.neusoft.coolweather.db.City;
 import com.neusoft.coolweather.db.County;
 import com.neusoft.coolweather.db.Province;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,7 +65,6 @@ public class Utility {
                     county.setWeatherId(countyObject.getString("weather_id"));
                     county.setCityId(cityId);
                     county.save();
-
                 }
                 return  true;
             }catch (JSONException e){
